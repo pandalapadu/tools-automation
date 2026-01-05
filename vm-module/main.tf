@@ -77,7 +77,7 @@ resource "azurerm_virtual_machine" "main" {
     publisher = "RedHat"
     offer     = "RHEL"
     sku       = "94_gen2"
-    version   = "9.4.2025040316" #exact # version from az vm_show
+    version   = "9.4.2025040316" #exact version from az vm_show
   }
   storage_os_disk {
     name              = var.component
