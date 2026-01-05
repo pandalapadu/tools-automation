@@ -54,7 +54,7 @@ resource "azurerm_public_ip" "main" {
 }
 ##For Create an A record in DNS server
 resource "azurerm_dns_a_record" "main" {
-  name                = var.component           # @subdomain (www.example.com)
+  name                = var.component           # subdomain (www.example.com)
   zone_name           = "azdevopsvenkat.site"
   resource_group_name = data.azurerm_resource_group.main.name
   ttl                 = 10                          # time-to-live in seconds
