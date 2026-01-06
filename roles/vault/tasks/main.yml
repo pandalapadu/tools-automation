@@ -1,3 +1,8 @@
+- name: Remove HashiCorp yum repo (not supported on RHEL 9)
+  ansible.builtin.file:
+    path: /etc/yum.repos.d/hashicorp.repo
+    state: absent
+
 - name: Install required packages
   ansible.builtin.dnf:
     name:
