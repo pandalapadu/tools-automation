@@ -11,8 +11,8 @@ variable "tools" {
     vault = {
       port = 8200
     }
+  }
 }
-
 variable "ssh_username" {}
 variable "ssh_password" {}
 
