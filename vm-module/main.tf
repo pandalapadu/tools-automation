@@ -52,13 +52,21 @@ resource "azurerm_public_ip" "main" {
   sku = "Standard"
   ip_version = "IPv4"
 }
-##For Create an A record in DNS server
-resource "azurerm_dns_a_record" "main" {
-  name                = var.component           # subdomain (www.example.com)
+##For Create an A record for Private in DNS server
+resource "azurerm_dns_a_record" "private" {
+  name                = "${ var.component}-Internal"           # subdomain (www.example.com)
   zone_name           = "azdevopsvenkat.site"
   resource_group_name = data.azurerm_resource_group.main.name
   ttl                 = 10                          # time-to-live in seconds
   records             = [azurerm_network_interface.main.private_ip_address]             # IP address of your VM or service
+}
+##For Create an A record for Public in DNS server
+resource "azurerm_dns_a_record" "public" {
+  name                = var.component           # subdomain (www.example.com)
+  zone_name           = "azdevopsvenkat.site"
+  resource_group_name = data.azurerm_resource_group.main.name
+  ttl                 = 10                          # time-to-live in seconds
+  records             = [azurerm_public_ip.main.ip_address]             # IP address of your VM or service
 }
 resource "azurerm_virtual_machine" "main" {
   name                = var.component
