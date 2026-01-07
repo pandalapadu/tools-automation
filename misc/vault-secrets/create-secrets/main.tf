@@ -4,6 +4,10 @@ terraform {
       source  = "hashicorp/vault"
       version = "5.3.0"
     }
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "4.49.0"
+    }
   }
 }
 resource "vault_mount" "main" {
