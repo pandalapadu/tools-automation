@@ -15,9 +15,21 @@ resource "vault_mount" "main" {
   path      = each.key
   type      = "kv"
 }
+
+resource "vault_kv_secret" "secret" {
+  data_json = ""
+  path      = "infra/ssh"
+  data_json = jsondecode( var.secrets.infra.ssh)
+}
+
 variable "secrets" {
   default = {
-    infra = {}
+    infra = {
+      ssh = {
+        admin_username = "azureuser"
+        admin_password = "azureuser@123"
+      }
+    }
     roboshop-dev = {}
   }
 }
