@@ -12,12 +12,11 @@ terraform {
 }
 resource "vault_mount" "main" {
   for_each = var.secrets
-  path      = each.key
+  path      = var.kv_path
   type      = "kv"
 }
 
 resource "vault_kv_secret" "secret" {
-  data_json = ""
   path      = "infra/ssh"
   data_json = jsondecode( var.secrets.infra.ssh)
 }
@@ -30,6 +29,9 @@ variable "secrets" {
         admin_password = "azureuser@123"
       }
     }
-    roboshop-dev = {}
+    roboshop-dev = {
+      frontend = {}
+      catalogue = {}
+    }
   }
 }
